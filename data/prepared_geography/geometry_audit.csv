@@ -1,0 +1,86 @@
+﻿geo_region;geometry_type;is_missing;is_empty;is_valid;validity_reason;min_lon;min_lat;max_lon;max_lat
+Пензенская область;MultiPolygon;False;False;True;Valid Geometry;42.0817395;52.2789279;46.9796245;54.03078
+Саратовская область;MultiPolygon;False;False;True;Valid Geometry;42.5036705;49.8031;50.84;52.8193706
+Республика Мордовия;MultiPolygon;False;False;True;Valid Geometry;42.1633666;53.6431667;46.7301725;55.1902678
+Тамбовская область;MultiPolygon;False;False;True;Valid Geometry;39.915694;51.587718;43.2480873;53.8226043
+Рязанская область;MultiPolygon;False;False;True;Valid Geometry;38.6659818;53.3087303;42.6910882;55.3664944
+Республика Крым;MultiPolygon;False;False;True;Valid Geometry;32.201579;44.184598;36.6815681;46.22958
+Республика Саха (Якутия);MultiPolygon;False;False;True;Valid Geometry;105.508341;55.4876715;162.8552088;76.3036362
+Ярославская область;MultiPolygon;False;False;True;Valid Geometry;37.3279086;56.5343034;41.1934982;58.9560117
+Вологодская область;MultiPolygon;False;False;True;Valid Geometry;34.7190928;58.4773149;47.1528775;61.6142319
+Тверская область;MultiPolygon;False;False;True;Valid Geometry;30.7724831;55.6328073;38.3269894;58.8631393
+Псковская область;MultiPolygon;False;False;True;Valid Geometry;27.3174553;55.58807;31.5144836;59.021159
+Новгородская область;MultiPolygon;False;False;True;Valid Geometry;29.6179567;56.9090665;36.2289187;59.4348575
+Орловская область;MultiPolygon;False;False;True;Valid Geometry;34.7919712;51.9343777;38.0659042;53.6524906
+Воронежская область;MultiPolygon;False;False;True;Valid Geometry;38.1358463;49.55795;42.9473374;52.1031845
+Республика Адыгея;MultiPolygon;False;False;True;Valid Geometry;38.6840182;43.7601459;40.7776469;45.2171133
+Ханты-Мансийский автономный округ — Югра;MultiPolygon;False;False;True;Valid Geometry;59.2037939;58.5796591;85.9766731;65.7177356
+Республика Башкортостан;MultiPolygon;False;False;True;Valid Geometry;53.1575416;51.5695539;60.0018089;56.5346435
+Ненецкий автономный округ;MultiPolygon;False;False;True;Valid Geometry;43.26921;65.8209691;65.6705324;70.4650267
+Архангельская область;MultiPolygon;False;False;True;Valid Geometry;35.22985;60.6358162;69.09173;81.8573237
+Республика Коми;MultiPolygon;False;False;True;Valid Geometry;45.3993499;59.198212;66.2506798;68.4226623
+Пермский край;MultiPolygon;False;False;True;Valid Geometry;51.7715413;56.1038833;59.4827308;61.6637704
+Ленинградская область;MultiPolygon;False;False;True;Valid Geometry;26.8591868;58.4173356;35.6978788;61.3292931
+Санкт-Петербург;MultiPolygon;False;False;True;Valid Geometry;29.4298103;59.6337832;30.759135;60.2427009
+Омская область;MultiPolygon;False;False;True;Valid Geometry;70.3583036;53.4370299;76.306639;58.5762449
+Москва;MultiPolygon;False;False;True;Valid Geometry;36.8031012;55.1422006;37.9674277;56.0212238
+Липецкая область;MultiPolygon;False;False;True;Valid Geometry;37.7217164;51.8864505;40.7647752;53.587226
+Севастополь;MultiPolygon;False;False;True;Valid Geometry;33.0912003;44.1910397;33.9262025;44.9405202
+Карачаево-Черкесская Республика;MultiPolygon;False;False;True;Valid Geometry;40.6754806;43.187409;42.6813728;44.4967953
+Чеченская Республика;MultiPolygon;False;False;True;Valid Geometry;44.83243;42.475502;46.6551325;44.0102052
+Республика Ингушетия;MultiPolygon;False;False;True;Valid Geometry;44.4773031;42.61473;45.2495169;43.6149656
+Чувашская Республика;MultiPolygon;False;False;True;Valid Geometry;45.9112555;54.6273954;48.4206024;56.3291256
+Сахалинская область;MultiPolygon;False;False;True;Valid Geometry;141.626;43.3605831;156.5135687;54.4263156
+Приморский край;MultiPolygon;False;False;True;Valid Geometry;130.4001;42.2929867;139.0325428;48.4645449
+Республика Тыва;MultiPolygon;False;False;True;Valid Geometry;88.7915312;49.7445;99.2738457;53.7301097
+Еврейская автономная область;MultiPolygon;False;False;True;Valid Geometry;130.5210813;47.6552863;134.9957846;49.4944863
+Астраханская область;MultiPolygon;False;False;True;Valid Geometry;44.9594742;45.4258107;49.3393524;48.905198
+Волгоградская область;MultiPolygon;False;False;True;Valid Geometry;41.1681048;47.4437326;47.4308172;51.2476078
+Ульяновская область;MultiPolygon;False;False;True;Valid Geometry;45.7966501;52.5327323;50.2429064;54.8914462
+Ростовская область;MultiPolygon;False;False;True;Valid Geometry;38.22075;45.9516883;44.3199919;50.2144769
+Самарская область;MultiPolygon;False;False;True;Valid Geometry;47.9367985;51.7735112;52.568276;54.6771616
+Алтайский край;MultiPolygon;False;False;True;Valid Geometry;77.8889532;50.6349149;87.1686505;54.4526338
+Республика Хакасия;MultiPolygon;False;False;True;Valid Geometry;87.8825893;51.2851257;91.9247307;55.4378777
+Краснодарский край;MultiPolygon;False;False;True;Valid Geometry;36.5873386;43.3848547;41.7439797;46.883503
+Оренбургская область;MultiPolygon;False;False;True;Valid Geometry;50.7684822;50.5001;61.6896718;54.3656388
+Курская область;MultiPolygon;False;False;True;Valid Geometry;34.0807655;50.9015572;38.5182799;52.4450602
+Белгородская область;MultiPolygon;False;False;True;Valid Geometry;35.3261196;49.79587;39.280925;51.4302873
+Томская область;MultiPolygon;False;False;True;Valid Geometry;75.0566645;55.6646601;89.3790331;61.0356717
+Республика Алтай;MultiPolygon;False;False;True;Valid Geometry;83.9328028;49.07;89.8656495;52.660268
+Курганская область;MultiPolygon;False;False;True;Valid Geometry;61.9661851;54.1842;68.7226637;56.8422967
+Ставропольский край;MultiPolygon;False;False;True;Valid Geometry;40.8460433;43.65829;45.7159533;46.2365165
+Кабардино-Балкарская Республика;MultiPolygon;False;False;True;Valid Geometry;42.397382;42.889536;44.4749861;44.0188569
+Республика Дагестан;MultiPolygon;False;False;True;Valid Geometry;45.1036288;41.1867802;48.5873601;44.9917214
+Кемеровская область;MultiPolygon;False;False;True;Valid Geometry;84.4538202;52.1627035;89.4066975;56.8344202
+Ямало-Ненецкий автономный округ;MultiPolygon;False;False;True;Valid Geometry;62.0004438;62.1956567;86.007285;73.5644299
+Смоленская область;MultiPolygon;False;False;True;Valid Geometry;30.7515697;53.413006;35.3950027;56.0670541
+Республика Татарстан;MultiPolygon;False;False;True;Valid Geometry;47.2370189;53.9742444;54.2658876;56.6783086
+Республика Бурятия;MultiPolygon;False;False;True;Valid Geometry;98.6305303;49.9599;116.921285;57.2497825
+Хабаровский край;MultiPolygon;False;False;True;Valid Geometry;130.3867416;46.6349613;147.2167891;62.5315874
+Амурская область;MultiPolygon;False;False;True;Valid Geometry;119.6553908;48.8522257;134.9209128;57.0605084
+Забайкальский край;MultiPolygon;False;False;True;Valid Geometry;107.7333787;49.1542;122.1458196;58.4373932
+Владимирская область;MultiPolygon;False;False;True;Valid Geometry;38.2681027;55.103384;42.976134;56.8127144
+Калининградская область;MultiPolygon;False;False;True;Valid Geometry;19.6386705;54.3187783;22.8866837;55.2945815
+Нижегородская область;MultiPolygon;False;False;True;Valid Geometry;41.7755247;54.4622347;47.7717876;58.0911755
+Тульская область;MultiPolygon;False;False;True;Valid Geometry;35.899512;52.9463569;38.9511323;54.8517403
+Калужская область;MultiPolygon;False;False;True;Valid Geometry;33.4414624;53.2769898;37.2782822;55.3512798
+Брянская область;MultiPolygon;False;False;True;Valid Geometry;31.24091;51.8430753;35.3251271;54.0347967
+Московская область;MultiPolygon;False;False;True;Valid Geometry;35.1484955;54.2556959;40.2056882;56.9585118
+Кировская область;MultiPolygon;False;False;True;Valid Geometry;46.2637837;56.0607618;53.9312421;61.0673929
+Красноярский край;MultiPolygon;False;False;True;Valid Geometry;76.126437;51.772621;113.9242535;81.2552783
+Тюменская область;MultiPolygon;False;False;True;Valid Geometry;64.8271919;55.1471;75.1992954;59.989634
+Свердловская область;MultiPolygon;False;False;True;Valid Geometry;57.2293844;56.0532241;66.1848568;61.9460689
+Иркутская область;MultiPolygon;False;False;True;Valid Geometry;95.6470298;51.1294888;119.1393147;64.321545
+Камчатский край;MultiPolygon;False;False;True;Valid Geometry;155.5516507;50.8650419;174.5188722;64.9374689
+Республика Карелия;MultiPolygon;False;False;True;Valid Geometry;29.3059283;60.6797966;37.9466381;66.6673243
+Челябинская область;MultiPolygon;False;False;True;Valid Geometry;57.1312877;51.9811;63.3541;56.3662873
+Удмуртская Республика;MultiPolygon;False;False;True;Valid Geometry;51.1241646;55.8505778;54.4348258;58.5458421
+Республика Северная Осетия — Алания;MultiPolygon;False;False;True;Valid Geometry;43.3984872;42.546937;44.9599445;43.8351157
+Чукотский автономный округ;MultiPolygon;False;False;True;Valid Geometry;-180.0;61.8076382;180.0;71.6061501
+Мурманская область;MultiPolygon;False;False;True;Valid Geometry;28.4160861;66.0565501;41.4098699;69.9538611
+Новосибирская область;MultiPolygon;False;False;True;Valid Geometry;75.08801;53.2909411;85.1168747;57.2355333
+Ивановская область;MultiPolygon;False;False;True;Valid Geometry;39.3740082;56.3523108;43.3246122;57.7398409
+Костромская область;MultiPolygon;False;False;True;Valid Geometry;40.3901028;57.2721688;47.6395146;59.6236037
+Республика Марий Эл;MultiPolygon;False;False;True;Valid Geometry;45.6237398;55.8249947;50.202985;57.342734
+Магаданская область;MultiPolygon;False;False;True;Valid Geometry;144.7286241;58.8370935;163.4956937;66.3391385
+Республика Калмыкия;MultiPolygon;False;False;True;Valid Geometry;41.6343079;44.7597697;47.5401548;48.2709092
