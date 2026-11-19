@@ -308,7 +308,7 @@ for region, district in district_corrections.items():
         result["object_name"] == region,
         "federal_district"
     ] = district
-    
+
 # 7. Проверка сохранности данных
 
 expected = stats.set_index("object_okato")

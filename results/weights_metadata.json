@@ -1,0 +1,29 @@
+{
+  "definition": "Queen polygon contiguity; each original island linked bidirectionally to its nearest projected representative point; row standardized",
+  "projection_for_bridge_distance": "+proj=laea +lat_0=62 +lon_0=100 +datum=WGS84 +units=m +type=crs",
+  "ids": "object_okato, ascending, eight-character strings",
+  "n": 85,
+  "queen_edges_undirected": 190,
+  "queen_islands": [
+    "27000000",
+    "64000000"
+  ],
+  "queen_components": 4,
+  "bridge_edges": [
+    {
+      "island_okato": "27000000",
+      "neighbor_okato": "58000000",
+      "distance_km": 523.1543873809468
+    },
+    {
+      "island_okato": "64000000",
+      "neighbor_okato": "05000000",
+      "distance_km": 824.5111391785622
+    }
+  ],
+  "final_components": 2,
+  "final_edges_directed": 384,
+  "mean_neighbors": 4.517647058823529,
+  "sensitivity_definition": "symmetrized four nearest projected representative points; row standardized",
+  "sensitivity_components": 1
+}
