@@ -13,6 +13,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import numpy as np
 import pandas as pd
 import scipy
@@ -219,7 +220,7 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
                 subset.plot(ax=ax, color=color[label], edgecolor="#777777", linewidth=0.22, label=label)
         ax.set_title(title + " · FDR 5%", fontsize=12, loc="left")
         ax.set_axis_off()
-        ax.legend(loc="lower left", ncol=5, fontsize=8)
+        ax.legend(handles=[Patch(facecolor=color[k], edgecolor="#777777", label=k) for k in ("HH", "LL", "HL", "LH", "NS")], loc="lower left", ncol=5, fontsize=8)
     fig.savefig(MAPS / "03_local_moran.png", dpi=200)
     plt.close(fig)
     display.to_crs(4326).to_file(OUT / "regional_results.geojson", driver="GeoJSON")

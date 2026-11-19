@@ -88,4 +88,3 @@ def main():
     print('Independent numerical verification passed. Permutation p-values and GIS topology require the full PySAL pipeline.')
 if __name__=='__main__':
     main()
-

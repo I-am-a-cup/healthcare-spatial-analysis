@@ -22,4 +22,3 @@ for ax, field, title, fmt in zip(axes, ("AIC","RMSE_in_sample","Moran_I_innovati
 fig.suptitle("Сопоставление OLS, SAR и SEM · 85 регионов, 2021",fontsize=14)
 fig.savefig(ROOT / "maps/06_model_comparison.png", dpi=200)
 plt.close(fig)
-
