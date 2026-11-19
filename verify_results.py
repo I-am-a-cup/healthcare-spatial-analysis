@@ -103,7 +103,16 @@ def main():
         assert all(label in {'HH','LH','LL','HL','NS'} for label in labels)
         assert np.array_equal(q<=0.05,np.array(labels)!='NS')
         assert dict(collections.Counter(labels))==diag['LISA_FDR_counts'][prefix+'_LISA_5pct_FDR']
-    print('LISA two-tail p-values, BH adjustment and class counts: PASS')
+        # BY adjusts the same step-up sequence by the harmonic factor.
+        h_n=sum(1/i for i in range(1,len(pv)+1))
+        q_by=np.minimum(1,q*h_n)
+        close(q_by,[val(r,prefix+'_local_q_fdr_by') for r in local],atol=1e-12)
+        labels_by=[r[prefix+'_LISA_5pct_FDR_BY'] for r in local]
+        assert all(label in {'HH','LH','LL','HL','NS'} for label in labels_by)
+        assert np.array_equal(q_by<=0.05,np.array(labels_by)!='NS')
+        assert all(by=='NS' or by==bh for bh,by in zip(labels,labels_by))
+        assert dict(collections.Counter(labels_by))==diag['LISA_FDR_BY_counts'][prefix+'_LISA_5pct_FDR_BY']
+    print('LISA two-tail p-values, BH/BY adjustments and class counts: PASS')
     print('Independent numerical verification passed. Simulation of raw permutation distributions and GIS topology require the full PySAL pipeline.')
 if __name__=='__main__':
     main()

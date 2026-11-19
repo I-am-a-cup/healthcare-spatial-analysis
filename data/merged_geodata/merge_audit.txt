@@ -1,7 +1,7 @@
 === ИСХОДНЫЕ ФАЙЛЫ ===
-regions_statistics.csv | SHA256: 0073cfdaa2b0d4840445a9374827ac37bfd433b66b1951d79557bd67927f97a6
+regions_statistics.csv | SHA256 (LF-normalized CSV): 3ed67d83ad5e8e59e5a2f392ad01ea2b9a608412f9ac3c9e377b416341400afc
 russia_regions.geojson | SHA256: c9c6134a90043dc6fcfc9f177abdf5c408123e6d3d07ea17702fe943fc72553d
-region_crosswalk.csv | SHA256: 9c31afd0675b72e7aef3ada824c26ac8d44f037aa54aadfdcb8efa836f3e1fe0
+region_crosswalk.csv | SHA256 (LF-normalized CSV): cad06f1545694beeb45164b811b0a585b052524761098785bf34556b74aac378
 
 === ИТОГ ===
 Регионов: 85
@@ -15,5 +15,5 @@ CRS: EPSG:4326
 ОКТМО сохранены без изменений.
 Федеральные округа уточнены для четырёх территорий: Республика Крым, г. Севастополь, Республика Бурятия, Забайкальский край.
 Историческая точность границ на 2021 год не подтверждена.
-CSV: regions_2021_attributes.csv
-GeoJSON: regions_2021_geospatial.geojson
+CSV: merged_geodata\regions_2021_attributes.csv
+GeoJSON: merged_geodata\regions_2021_geospatial.geojson

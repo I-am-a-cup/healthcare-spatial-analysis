@@ -34,6 +34,8 @@ def check(condition, message):
 
 
 def sha256(path):
+    if path.suffix.lower() == ".csv":
+        return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
     digest = hashlib.sha256()
 
     with path.open("rb") as source:
@@ -76,7 +78,8 @@ crosswalk = pd.read_csv(
 report("=== ИСХОДНЫЕ ФАЙЛЫ ===")
 
 for path in (STAT_FILE, GEO_FILE, CROSSWALK_FILE):
-    report(f"{path.name} | SHA256: {sha256(path)}")
+    hash_kind = "SHA256 (LF-normalized CSV)" if path.suffix == ".csv" else "SHA256"
+    report(f"{path.name} | {hash_kind}: {sha256(path)}")
 
 
 # 2. Проверка структуры
@@ -444,6 +447,7 @@ report(f"GeoJSON: {geojson_out.relative_to(DATA_DIR)}")
 audit_out.write_text(
     "\n".join(log) + "\n",
     encoding="utf-8",
+    newline="\n",
 )
 
 print(f"\nГотово. Журнал: {audit_out}")

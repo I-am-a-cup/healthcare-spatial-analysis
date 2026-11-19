@@ -22,6 +22,10 @@
     python data/prepare_geography.py
     python data/merge_geodata.py
 
+Исходные CSV при выгрузке из Git могут иметь LF вместо CRLF; SHA-256 ниже относится к байтам CRLF (checkout по .gitattributes).
+
 - SHA256 healthcare.csv: 52453a0eda0318de7a01d8be2d5b9a715f253c6aff42fe5c83b56bb199bd8bed
 - SHA256 population.csv: 351ae2dc22117118721d751cc21cf97c2d08b300c0b0328073197b4557d15977
+- SHA256 healthcare.csv (LF): e454f70db183715cfd04f7a3c944ae084e31a4c7ff309fcc737997cd234499f6
+- SHA256 population.csv (LF): ff9f2d66d03447b83cd9ff496ce8b6574cd5d59b1f8dabf558a4c0cf4b553e9e
 - SHA256 regions_2021_geospatial.geojson: a6d77860a688fa8155343cd9429bb1f237d351814e0847ad39fff910fe1e6a06

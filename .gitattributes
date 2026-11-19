@@ -1,0 +1,5 @@
+# Preserve documented input CSV checkout bytes; keep GeoJSON and audit LF.
+/data/healthcare.csv text eol=crlf
+/data/population.csv text eol=crlf
+*.geojson text eol=lf
+/data/merged_geodata/merge_audit.txt text eol=lf

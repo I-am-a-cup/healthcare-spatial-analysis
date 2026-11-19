@@ -133,7 +133,7 @@ def model_results(gdf: gpd.GeoDataFrame, w: W, models: dict) -> tuple[pd.DataFra
         frame[f"{name.lower()}_prediction_error"] = error
         frame[f"{name.lower()}_innovation"] = innovation
         diag = moran_test(innovation, w)
-        # spreg ML_Error 1.9.2 omits lambda in its built-in AIC/BIC count.
+        # Use an explicit common parameter count instead of library-specific AIC/BIC.
         # Count two regression coefficients plus the spatial parameter for SAR/SEM.
         k = 2 if name == "OLS" else 3
         loglik = float(model.logll)
@@ -169,6 +169,7 @@ def local_moran(gdf: gpd.GeoDataFrame, w: W) -> pd.DataFrame:
         upper = (np.count_nonzero((sim > observed) | ties, axis=0) + 1) / (LOCAL_PERMUTATIONS + 1)
         p_two = np.minimum(1.0, 2 * np.minimum(lower, upper))
         rejected, qvals, _, _ = multipletests(p_two, alpha=0.05, method="fdr_bh")
+        rejected_by, qvals_by, _, _ = multipletests(p_two, alpha=0.05, method="fdr_by")
         labels = np.array(["HH", "LH", "LL", "HL"])
         output[f"{prefix}_local_I"] = lisa.Is
         output[f"{prefix}_local_p"] = p_two
@@ -176,6 +177,8 @@ def local_moran(gdf: gpd.GeoDataFrame, w: W) -> pd.DataFrame:
         output[f"{prefix}_local_p_upper"] = upper
         output[f"{prefix}_local_q_fdr"] = qvals
         output[f"{prefix}_LISA_5pct_FDR"] = np.where(rejected, labels[lisa.q - 1], "NS")
+        output[f"{prefix}_local_q_fdr_by"] = qvals_by
+        output[f"{prefix}_LISA_5pct_FDR_BY"] = np.where(rejected_by, labels[lisa.q - 1], "NS")
     return output
 
 
@@ -234,7 +237,7 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
             subset = display[display[col] == label]
             if len(subset):
                 subset.plot(ax=ax, color=color[label], edgecolor="#777777", linewidth=0.22, label=label)
-        ax.set_title(title + " · FDR 5%, двусторонний тест", fontsize=12, loc="left")
+        ax.set_title(title + " · BH-FDR 5%, двусторонний тест", fontsize=12, loc="left")
         ax.set_axis_off()
         ax.legend(handles=[Patch(facecolor=color[k], edgecolor="#777777", label=k) for k in ("HH", "LL", "HL", "LH", "NS")], loc="lower left", ncol=5, fontsize=8)
     fig.supxlabel(MAP_SOURCE, fontsize=9, color="#555555")
@@ -269,9 +272,11 @@ def main() -> None:
                    "OLS_Breusch_Pagan": models["OLS"].breusch_pagan,
                    "OLS_Koenker_Bassett": models["OLS"].koenker_bassett,
                    "selected_by_AIC": chosen}
-    diagnostics["LISA_method"] = {"permutations": LOCAL_PERMUTATIONS, "seed": SEED, "alternative": "two-sided equal-tail conditional randomization", "ties": "inclusive, tolerance 1e-12", "adjustment": "BH per indicator, 85 tests"}
+    diagnostics["LISA_method"] = {"permutations": LOCAL_PERMUTATIONS, "seed": SEED, "alternative": "two-sided equal-tail conditional randomization", "ties": "inclusive, tolerance 1e-12", "adjustment": "BH primary, BY sensitivity; separately per indicator, 85 tests"}
     diagnostics["LISA_FDR_counts"] = {col: local[col].value_counts().to_dict()
                                       for col in ("doctors_LISA_5pct_FDR", "life_LISA_5pct_FDR")}
+    diagnostics["LISA_FDR_BY_counts"] = {col: local[col].value_counts().to_dict()
+                                         for col in ("doctors_LISA_5pct_FDR_BY", "life_LISA_5pct_FDR_BY")}
     alt_models = fit_models(gdf, knn)
     alt_comparison, alt_params, _ = model_results(gdf, knn, alt_models)
     save_csv(alt_comparison, "sensitivity_knn4_models.csv")

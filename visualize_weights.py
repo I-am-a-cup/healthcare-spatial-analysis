@@ -88,7 +88,8 @@ def main() -> None:
     draw.text((80 * SCALE, 157 * SCALE), "Связи регионов на карте", font=font(23, True), fill="#17243b")
 
     # Borders are simplified only for this illustration; the model retains original geometry.
-    for geometry in projected.values():
+    for region_id in ids:
+        geometry = projected[region_id]
         for polygon in polygons(geometry.simplify(25_000, preserve_topology=True)):
             outline = [screen(x, y) for x, y in polygon.exterior.coords]
             if len(outline) >= 3:
@@ -96,18 +97,17 @@ def main() -> None:
                 draw.line(outline, fill="#aeb9c7", width=1 * SCALE, joint="curve")
 
     points = {key: screen(*projected[key].representative_point().coords[0]) for key in ids}
-    bridges = {frozenset((b["island_okato"], b["neighbor_okato"]))
+    bridges = {tuple(sorted((b["island_okato"], b["neighbor_okato"])))
                for b in metadata["bridge_edges"]}
     seen = set()
-    for edge in edges:
-        source, target = edge["source_okato"], edge["target_okato"]
-        pair = frozenset((source, target))
+    for edge in sorted(edges, key=lambda e: (e["source_okato"], e["target_okato"])):
+        pair = tuple(sorted((edge["source_okato"], edge["target_okato"])))
+        source, target = pair
         if pair in seen or pair in bridges:
             continue
         seen.add(pair)
         draw.line((points[source], points[target]), fill="#5c98ca", width=2 * SCALE)
-    for pair in bridges:
-        source, target = tuple(pair)
+    for source, target in sorted(bridges):
         draw.line((points[source], points[target]), fill="#e1723f", width=5 * SCALE)
         for key in (source, target):
             x, y = points[key]

@@ -52,7 +52,7 @@
     "seed": 20261118,
     "alternative": "two-sided equal-tail conditional randomization",
     "ties": "inclusive, tolerance 1e-12",
-    "adjustment": "BH per indicator, 85 tests"
+    "adjustment": "BH primary, BY sensitivity; separately per indicator, 85 tests"
   },
   "LISA_FDR_counts": {
     "doctors_LISA_5pct_FDR": {
@@ -62,6 +62,14 @@
       "NS": 81,
       "HH": 3,
       "HL": 1
+    }
+  },
+  "LISA_FDR_BY_counts": {
+    "doctors_LISA_5pct_FDR_BY": {
+      "NS": 85
+    },
+    "life_LISA_5pct_FDR_BY": {
+      "NS": 85
     }
   },
   "OLS_HC3_doctors_p": 0.7249191367851957,
