@@ -154,7 +154,7 @@ def main() -> None:
 
     OUTPUT.parent.mkdir(exist_ok=True)
     image.save(OUTPUT, optimize=True)
-    print(f"Saved {OUTPUT} ({image.width}×{image.height})")
+    print(f"Saved {OUTPUT} ({image.width}x{image.height})")
 
 
 if __name__ == "__main__":
