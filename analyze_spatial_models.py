@@ -31,6 +31,8 @@ OUT = ROOT / "results"
 MAPS = ROOT / "maps"
 SEED = 20261118
 PERMUTATIONS = 999
+LOCAL_PERMUTATIONS = 9999
+MAP_SOURCE = "© OpenStreetMap contributors · ODbL 1.0 · openstreetmap.org/copyright | Росстат, «Если быть точным», CC BY 4.0"
 PROJECTION = "+proj=laea +lat_0=62 +lon_0=100 +datum=WGS84 +units=m +type=crs"
 
 
@@ -155,12 +157,23 @@ def local_moran(gdf: gpd.GeoDataFrame, w: W) -> pd.DataFrame:
     output = pd.DataFrame({"object_okato": gdf.object_okato})
     for variable, prefix in (("life_expectancy_years", "life"), ("doctors_per_10000", "doctors")):
         np.random.seed(SEED)
-        lisa = Moran_Local(gdf[variable].to_numpy(float), w, permutations=PERMUTATIONS,
-                           seed=SEED, n_jobs=1)
-        rejected, qvals, _, _ = multipletests(lisa.p_sim, alpha=0.05, method="fdr_bh")
+        lisa = Moran_Local(gdf[variable].to_numpy(float), w, permutations=LOCAL_PERMUTATIONS,
+                           seed=SEED, n_jobs=1, keep_simulations=True)
+        # Explicit two-sided equal-tail conditional randomization test;
+        # inclusive ties and add-one correction in both tails.
+        sim = np.asarray(lisa.sim)
+        observed = np.asarray(lisa.Is)
+        assert sim.shape == (LOCAL_PERMUTATIONS, len(gdf))
+        ties = np.isclose(sim, observed, rtol=1e-12, atol=1e-12)
+        lower = (np.count_nonzero((sim < observed) | ties, axis=0) + 1) / (LOCAL_PERMUTATIONS + 1)
+        upper = (np.count_nonzero((sim > observed) | ties, axis=0) + 1) / (LOCAL_PERMUTATIONS + 1)
+        p_two = np.minimum(1.0, 2 * np.minimum(lower, upper))
+        rejected, qvals, _, _ = multipletests(p_two, alpha=0.05, method="fdr_bh")
         labels = np.array(["HH", "LH", "LL", "HL"])
         output[f"{prefix}_local_I"] = lisa.Is
-        output[f"{prefix}_local_p"] = lisa.p_sim
+        output[f"{prefix}_local_p"] = p_two
+        output[f"{prefix}_local_p_lower"] = lower
+        output[f"{prefix}_local_p_upper"] = upper
         output[f"{prefix}_local_q_fdr"] = qvals
         output[f"{prefix}_LISA_5pct_FDR"] = np.where(rejected, labels[lisa.q - 1], "NS")
     return output
@@ -185,6 +198,7 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
     fig, axes = plt.subplots(1, 2, figsize=(19, 7), layout="constrained")
     add_map(axes[0], display, "doctors_per_10000", "Врачи на 10 000 жителей · 2021", "YlGnBu")
     add_map(axes[1], display, "life_expectancy_years", "Ожидаемая продолжительность жизни · 2021, лет", "YlOrRd")
+    fig.supxlabel(MAP_SOURCE, fontsize=9, color="#555555")
     fig.savefig(MAPS / "01_indicators.png", dpi=200)
     plt.close(fig)
 
@@ -197,6 +211,7 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
     add_map(axes[0], display, "life_expectancy_years", "Факт · лет", "YlOrRd", low, high)
     add_map(axes[1], display, pred, f"Расчёт {chosen} · лет", "YlOrRd", low, high)
     add_map(axes[2], display, err, "Факт − расчёт · лет", "RdBu_r", -span, span)
+    fig.supxlabel(MAP_SOURCE, fontsize=9, color="#555555")
     fig.savefig(MAPS / "02_final_model.png", dpi=200)
     plt.close(fig)
 
@@ -207,6 +222,7 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
             -max(abs(display[err].min()), abs(display[err].max())),
             max(abs(display[err].min()), abs(display[err].max())))
     add_map(axes[1], display, innovation, f"Инновации {chosen} после пространственной фильтрации", "RdBu_r", -span, span)
+    fig.supxlabel(MAP_SOURCE, fontsize=9, color="#555555")
     fig.savefig(MAPS / "04_residual_diagnostics.png", dpi=200)
     plt.close(fig)
 
@@ -218,9 +234,10 @@ def make_maps(gdf: gpd.GeoDataFrame, results: pd.DataFrame, chosen: str,
             subset = display[display[col] == label]
             if len(subset):
                 subset.plot(ax=ax, color=color[label], edgecolor="#777777", linewidth=0.22, label=label)
-        ax.set_title(title + " · FDR 5%", fontsize=12, loc="left")
+        ax.set_title(title + " · FDR 5%, двусторонний тест", fontsize=12, loc="left")
         ax.set_axis_off()
         ax.legend(handles=[Patch(facecolor=color[k], edgecolor="#777777", label=k) for k in ("HH", "LL", "HL", "LH", "NS")], loc="lower left", ncol=5, fontsize=8)
+    fig.supxlabel(MAP_SOURCE, fontsize=9, color="#555555")
     fig.savefig(MAPS / "03_local_moran.png", dpi=200)
     plt.close(fig)
     display.to_crs(4326).to_file(OUT / "regional_results.geojson", driver="GeoJSON")
@@ -252,6 +269,7 @@ def main() -> None:
                    "OLS_Breusch_Pagan": models["OLS"].breusch_pagan,
                    "OLS_Koenker_Bassett": models["OLS"].koenker_bassett,
                    "selected_by_AIC": chosen}
+    diagnostics["LISA_method"] = {"permutations": LOCAL_PERMUTATIONS, "seed": SEED, "alternative": "two-sided equal-tail conditional randomization", "ties": "inclusive, tolerance 1e-12", "adjustment": "BH per indicator, 85 tests"}
     diagnostics["LISA_FDR_counts"] = {col: local[col].value_counts().to_dict()
                                       for col in ("doctors_LISA_5pct_FDR", "life_LISA_5pct_FDR")}
     alt_models = fit_models(gdf, knn)

@@ -8,8 +8,8 @@
     "p_permutation": 0.001
   },
   "pearson": {
-    "r": 0.05279792431222156,
-    "p": 0.6312982015329556
+    "r": 0.05279792431222159,
+    "p": 0.6312982015329563
   },
   "spearman": {
     "rho": 0.03257911480594079,
@@ -29,7 +29,7 @@
   ],
   "OLS_robust_LM_lag": [
     3.450309393479452,
-    0.06323993091960634
+    0.06323993091960632
   ],
   "OLS_Jarque_Bera": {
     "df": 2,
@@ -47,14 +47,20 @@
     "pvalue": 0.7265956804990013
   },
   "selected_by_AIC": "SEM",
+  "LISA_method": {
+    "permutations": 9999,
+    "seed": 20261118,
+    "alternative": "two-sided equal-tail conditional randomization",
+    "ties": "inclusive, tolerance 1e-12",
+    "adjustment": "BH per indicator, 85 tests"
+  },
   "LISA_FDR_counts": {
     "doctors_LISA_5pct_FDR": {
       "NS": 85
     },
     "life_LISA_5pct_FDR": {
-      "NS": 80,
+      "NS": 81,
       "HH": 3,
-      "LL": 1,
       "HL": 1
     }
   },

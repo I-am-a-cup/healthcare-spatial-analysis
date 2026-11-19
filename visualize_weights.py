@@ -152,6 +152,7 @@ def main() -> None:
         label = f"{names[bridge['island_okato']]} → {names[bridge['neighbor_okato']]}"
         draw.text((1690*SCALE, (1021 + index*30)*SCALE), label, font=font(15), fill="#9b4c2f")
 
+    draw.text((60*SCALE, 1115*SCALE), "© OpenStreetMap contributors · ODbL 1.0 · openstreetmap.org/copyright", font=font(14), fill="#637087")
     OUTPUT.parent.mkdir(exist_ok=True)
     image.save(OUTPUT, optimize=True)
     print(f"Saved {OUTPUT} ({image.width}x{image.height})")

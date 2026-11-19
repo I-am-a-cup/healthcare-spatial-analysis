@@ -85,6 +85,25 @@ def main():
     print('Data, 384 directed weights, two components, CSV/GeoJSON consistency: PASS')
     for key,v in [('doctors_per_10000',x),('life_expectancy_years',y)]:
         print(key, 'min/median/mean/max/sd:',*[round(z,4) for z in (v.min(),np.median(v),v.mean(),v.max(),v.std(ddof=1))])
-    print('Independent numerical verification passed. Permutation p-values and GIS topology require the full PySAL pipeline.')
+    local=read('results/local_moran.csv')
+    assert len(local)==85 and {r['object_okato'] for r in local}==set(ids)
+    assert diag['LISA_method']['permutations']==9999
+    for prefix in ('life','doctors'):
+        lower=np.array([val(r,prefix+'_local_p_lower') for r in local])
+        upper=np.array([val(r,prefix+'_local_p_upper') for r in local])
+        assert ((lower>0)&(lower<=1)&(upper>0)&(upper<=1)).all()
+        pv=np.minimum(1,2*np.minimum(lower,upper))
+        close(pv,[val(r,prefix+'_local_p') for r in local],atol=1e-12)
+        # Independent Benjamini-Hochberg adjustment on each indicator.
+        order=np.argsort(pv)
+        q=np.empty_like(pv)
+        q[order]=np.minimum(1,np.minimum.accumulate((pv[order]*len(pv)/np.arange(1,len(pv)+1))[::-1])[::-1])
+        close(q,[val(r,prefix+'_local_q_fdr') for r in local],atol=1e-12)
+        labels=[r[prefix+'_LISA_5pct_FDR'] for r in local]
+        assert all(label in {'HH','LH','LL','HL','NS'} for label in labels)
+        assert np.array_equal(q<=0.05,np.array(labels)!='NS')
+        assert dict(collections.Counter(labels))==diag['LISA_FDR_counts'][prefix+'_LISA_5pct_FDR']
+    print('LISA two-tail p-values, BH adjustment and class counts: PASS')
+    print('Independent numerical verification passed. Simulation of raw permutation distributions and GIS topology require the full PySAL pipeline.')
 if __name__=='__main__':
     main()

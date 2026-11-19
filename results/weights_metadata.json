@@ -13,12 +13,12 @@
     {
       "island_okato": "27000000",
       "neighbor_okato": "58000000",
-      "distance_km": 523.1543873809468
+      "distance_km": 523.1543873809469
     },
     {
       "island_okato": "64000000",
       "neighbor_okato": "05000000",
-      "distance_km": 824.5111391785622
+      "distance_km": 824.5111391785605
     }
   ],
   "final_components": 2,
